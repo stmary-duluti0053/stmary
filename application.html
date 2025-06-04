@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Application | St. Mary's Duluti</title>
+
+  <!-- Font Awesome for Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <style>
+
+    .modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-box h2 {
+  margin-top: 0;
+  color: #4e4376;
+  text-align: center;
+}
+
+.modal-box label {
+  display: block;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.modal-box input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.modal-box button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.modal-box button[type="submit"] {
+  background-color: #4e4376;
+  color: white;
+}
+
+.modal-box button#cancelBtn {
+  background-color: #aaa;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+    /* Reset & base styles */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding:  20px;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      padding: 6px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      animation: slideDown 0.5s ease;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .navbar-logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .menu a:hover {
+      background: rgba(255 255 255 / 0.15);
+      transform: scale(1.07);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 21px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      user-select: none;
+    }
+
+    .hamburger .bar {
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Dropdown (if needed) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      min-width: 200px;
+      z-index: 1;
+      top: 45px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: #4e4376;
+      padding: 15px 20px;
+      display: block;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #eaeaea;
+      transform: translateX(8px);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Responsive Navbar */
+    @media (max-width: 768px) {
+      .menu {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #4e4376;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu li {
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      .menu a {
+        padding: 12px 0;
+        width: 100%;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* MAIN CONTENT */
+    .container {
+      max-width: 800px;
+      background: white;
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(78, 67, 118, 0.15);
+      text-align: center;
+    }
+
+    .container h1 {
+      color: #4e4376;
+      margin-bottom: 15px;
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+
+    .intro {
+      font-size: 1.2rem;
+      color: #6b5b95;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    h2 {
+      color: #2b5876;
+      font-size: 1.8rem;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-align: left;
+      border-left: 5px solid #4e4376;
+      padding-left: 12px;
+    }
+
+    ul.application-links {
+      list-style: none;
+      padding-left: 0;
+      text-align: left;
+    }
+
+    ul.application-links li {
+      margin: 14px 0;
+    }
+
+    ul.application-links a {
+      text-decoration: none;
+      color: #2b5876;
+      font-weight: 600;
+      font-size: 1.2rem;
+      position: relative;
+      padding-left: 35px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      user-select: none;
+    }
+
+    ul.application-links a::before {
+      content: "\f393"; /* FontAwesome graduation cap */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 3px;
+      font-size: 20px;
+      color: #4e4376;
+    }
+
+    ul.application-links a:hover {
+      color: #4e4376;
+      transform: translateX(12px);
+      text-decoration: none;
+    }
+
+    /* FADE-IN ANIMATION */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Content */
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      ul.application-links a {
+        font-size: 1rem;
+        padding-left: 28px;
+      }
+
+      ul.application-links a::before {
+        font-size: 18px;
+        top: 2px;
+      }
+    }
+    @media (max-width: 480px) {
+  html {
+    font-size: 85%; /* Punguza font size kwa karibu 15% kwenye simu ndogo */
+  }
+}
+
+  </style>
+</head>
+<body><form action="https://formsubmit.co/stmary.duluti@yahoo.com" method="POST">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <div class="navbar-logo">St. Mary's Duluti</div>
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="menu" id="navbar-menu">
+      <li><a href="index duluti.html"><img src="home icon.png" alt="Home icon" style="width:20px; vertical-align:middle;"> Home</a></li>
+      <li><a href="academics page.html"><img src="academic icon.png" alt="Academic icon" style="width:20px; vertical-align:middle;"> Academics</a></li>
+      <li><a href="admission page.html"><img src="admission.png" alt="Admission icon" style="width:20px; vertical-align:middle;"> Admission</a></li>
+      <li><a href="explore us page.html"><img src="explore us.png" alt="Explore Us icon" style="width:20px; vertical-align:middle;"> Explore Us</a></li>
+      <li><a href="publication.html"><img src="publication.png" alt="Publication icon" style="width:20px; vertical-align:middle;"> Publication</a></li>
+      <li><a href="gallery.html"><img src="gallery.png" alt="Gallery icon" style="width:20px; vertical-align:middle;"> Gallery</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <h1>Welcome to the Admission Application Portal</h1>
+    <p class="intro">
+      We are delighted that you are considering St. Mary's Duluti for your
+      educational journey. Our institution is committed to nurturing talent,
+      fostering excellence, and preparing students for a bright future.<br />
+    </p>
+    <p class="intro">
+  <strong>St. Mary’s Duluti</strong> is pleased to announce that applications are now open for the <strong>2025 academic year</strong> for all levels — from <strong>Form One to Form Six</strong>. We warmly invite students and parents to apply and become part of a school where excellence, discipline, and personal growth are at the heart of everything we do.
+</p>
+
+
+
+    <p class="intro">
+  <strong>How to Apply:</strong>
+</p>
+<ol class="intro" style="text-align: left; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+  <li>Select the class level you wish to apply for (e.g., Form One, Form Five).</li>
+  <li>A message will appear prompting you to make a payment for the application form.</li>
+  <li>Complete the payment using your mobile number.</li>
+  <li>You will receive a verification code via SMS after the payment.</li>
+  <li>Enter the verification code in the space provided.</li>
+  <li>Fill in your personal and academic information accurately to complete the application.</li>
+</ol>
+
+    <h2 class="fade-in">For O-Level Admissions:</h2>
+    <ul class="application-links fade-in">
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Pre-Form One</a></li>
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Form One</a></li>
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Form Two</a></li>
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Form Three</a></li>
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Form Four</a></li>
+    </ul>
+
+    <h2 class="fade-in">For A-Level Admissions:</h2>
+    <ul class="application-links fade-in">
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Pre-Form Five</a></li>
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Form Five</a></li>
+      <li><a href="#"><i class="fas fa-graduation-cap"></i> Form Six</a></li>
+    </ul>
+  </div>
+
+  <!-- Payment Modal -->
+<div id="paymentModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2>Complete Payment</h2>
+    <form id="paymentForm">
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required placeholder="e.g. 07XXXXXXXX">
+      
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" required placeholder="e.g. 10000">
+      
+      <button type="submit">Okay</button>
+      <button type="button" id="cancelBtn">Cancel</button>
+    </form>
+  </div>
+</div>
+<li><a href="form one.html">form one</a></li>
+</form>
+
+  <!-- FADE-IN JS -->
+  <script>
+    const fadeElements = document.querySelectorAll(".fade-in");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    fadeElements.forEach((el) => observer.observe(el));
+
+    // Hamburger toggle
+    const menuToggle = document.getElementById("menu-toggle");
+    const navbarMenu = document.getElementById("navbar-menu");
+
+    menuToggle.addEventListener("click", () => {
+      navbarMenu.classList.toggle("active");
+      menuToggle.classList.toggle("active");
+
+      // Accessibility
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+
+    // Fungua modal ya malipo unapo-click link yoyote ya O-Level
+document.querySelectorAll('.application-links a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault(); // Zuia link kufungua ukurasa mpya
+    document.getElementById('paymentModal').style.display = 'flex';
+  });
+});
+
+// Funga modal ukibonyeza Cancel
+document.getElementById('cancelBtn').addEventListener('click', function() {
+  document.getElementById('paymentModal').style.display = 'none';
+});
+
+// Tuma form ya malipo
+document.getElementById('paymentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const phone = document.getElementById('phone').value;
+  const amount = document.getElementById('amount').value;
+
+  alert(`Payment request sent to ${phone} for amount Tsh ${amount}.\nPlease enter your mobile PIN on your phone.`);
+
+  // Funga modal
+  document.getElementById('paymentModal').style.display = 'none';
+
+  // Hapa unaweza kuunganisha na API ya M-Pesa, Tigo Pesa nk.
+});
+
+  </script>
+</body>
+</html>
