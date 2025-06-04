@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admission | St. Mary's Duluti</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      color: #333;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* ======== NAVBAR ======== */
+    .navbar {
+      width: 100%;
+      max-width: calc(1200px - 10mm);
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      padding: 8px 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      animation: slideDown 0.5s ease;
+      margin: 0 auto 40px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .navbar-logo {
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      padding: 6px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+      border-radius: 6px;
+      user-select: none;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.07);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 21px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      user-select: none;
+    }
+
+    .hamburger .bar {
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #4e4376;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu li {
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      .menu a {
+        padding: 12px 0;
+        width: 100%;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* ======== PAGE CONTENT ======== */
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      color: #4c6386;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    .filter-buttons button {
+      background-color: #49898b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      background-color: #2b5876;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+
+    .section:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    .section:nth-child(even) {
+      animation-delay: 0.4s;
+    }
+
+    h2 {
+      color: #4c6386;
+      margin-bottom: 10px;
+      
+    }
+
+    .content {
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: calc(100% - 10mm);
+      margin: 0 auto;
+    }
+
+    .content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* Scroll Animation */
+    .section-content {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: scrollReveal 1s forwards;
+    }
+
+    @keyframes scrollReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive styles (optional) */
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .content {
+        padding: 10px;
+      }
+    }
+
+    /* Modernized Login Form */
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 350px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+      transition: 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #4e4376;
+      background: #f0f4f8;
+      box-shadow: 0 0 10px rgba(78, 67, 118, 0.3);
+    }
+
+    label {
+      font-size: 1rem;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    button[type="submit"] {
+      background-color: #4e4376;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #2b5876;
+    }
+
+    #login-error {
+      color: red;
+      font-size: 0.9rem;
+      display: none;
+      text-align: center;
+    }
+
+    /* Special styling for the student report card */
+    
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION BAR -->
+  <nav
+    class="navbar"
+    role="navigation"
+    aria-label="Primary Navigation"
+  >
+    <div class="navbar-logo">St. Mary's Duluti</div>
+    <button
+      class="hamburger"
+      id="menu-toggle"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="navbar-menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="menu" id="navbar-menu">
+      <li>
+        <a href="index duluti.html"
+          ><img
+            src="home icon.png"
+            alt="Home"
+            style="width: 20px; vertical-align: middle"
+        /> Home</a>
+      </li>
+      <li>
+        <a href="academics.html"
+          ><img
+            src="academic icon.png"
+            alt="Academics"
+            style="width: 20px; vertical-align: middle"
+        /> Academics</a>
+      </li>
+      <li>
+        <a href="application.html"
+          ><img
+            src="application.png"
+            alt="application"
+            style="width: 20px; vertical-align: middle"
+        />Application</a>
+      </li>
+      <li>
+        <a href="publication.html"
+          ><img
+            src="publication.png"
+            alt="publication"
+            style="width: 20px; vertical-align: middle"
+        />Publication</a>
+      </li>
+      <li>
+        <a href="explore us.html"
+          ><img
+            src="explore us.png"
+            alt="Explore Us"
+            style="width: 20px; vertical-align: middle"
+        /> Explore Us</a>
+      </li>
+      <li>
+        <a href="gallery.html"
+          ><img
+            src="gallery.png"
+            alt="Gallery"
+            style="width: 20px; vertical-align: middle"
+        /> Gallery</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <h1>Admission</h1>
+
+<!-- FILTER BUTTONS -->
+<div class="filter-buttons">
+  <button class="active" onclick="filterSelection('all')">All</button>
+  <button onclick="filterSelection('introduction')">Introduction</button>
+  <button onclick="filterSelection('student-info')">Student Information</button>
+  <button onclick="filterSelection('eligibility')">Eligibility</button>
+  <button onclick="filterSelection('application-process')">Application Process</button>
+</div>
+
+
+  <!-- INTRODUCTION SECTION -->
+  <div class="section introduction">
+    <h2>Welcome to St. Mary's Duluti School</h2>
+    <div class="content">
+      <p>
+        Welcome to St. Mary's Duluti, a place where students are nurtured to achieve academic excellence and personal growth. Our school offers a range of educational programs that cater to diverse learning needs. We believe in creating an inclusive environment where every student has the opportunity to succeed.
+      </p>
+      <p>
+        Here, students are equipped with the skills and values to face the challenges of the future, with a focus on innovation, integrity, and leadership.
+      </p>
+    </div>
+  </div>
+
+
+
+  <!-- STUDENT REPORT SECTION (HIDDEN BY DEFAULT) -->
+  <div class="section student-info" id="student-report-section" style="display: none;">
+    <h2>Student Report Form</h2>
+    <div class="content">
+      <p>
+        This section allows students to securely access their academic reports. Please log in below using your credentials.
+      </p>
+
+      <form id="login-form" onsubmit="event.preventDefault(); login();">
+        <label for="student-name">Student Name:</label>
+        <input
+          type="text"
+          id="student-name"
+          name="student-name"
+          required
+          placeholder="Enter Student Name"
+          autocomplete="off"
+        />
+
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          placeholder="Enter Password"
+          autocomplete="off"
+        />
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p id="login-error">Incorrect name or password. Please try again.</p>
+    </div>
+  </div>
+<!-- ELIGIBILITY SECTION -->
+  <div class="section eligibility">
+    <h2>Eligibility Criteria</h2>
+    <div class="content">
+      <p>
+        To be eligible for admission, applicants must meet the following criteria:
+        <ul>
+          <li>Must have completed primary education.</li>
+          <li>Must meet the age requirements for the grade level.</li>
+          <li>Must pass the entrance examination (if applicable).</li>
+          <li>Other eligibility criteria as specified by the school’s policies.</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <!-- APPLICATION PROCESS SECTION -->
+  <div class="section application-process">
+    <h2>Application Process</h2>
+    <div class="content">
+      <p>
+        The application process is simple and can be done online through our website or in person at the school’s administrative office. Follow these steps:
+        <ul>
+          <li>Step 1: Fill out the online application form.</li>
+          <li>Step 2: Submit necessary documents (birth certificate, school reports, etc.).</li>
+          <li>Step 3: Schedule and attend an interview (if applicable).</li>
+          <li>Step 4: Await the admission decision.</li>
+        </ul>
+      </p>
+       <p>
+        Please provide the following information during the application process:
+        <ul>
+          <li>Full name (as per the birth certificate)</li>
+          <li>Date of birth</li>
+          <li>Address and contact details</li>
+          <li>Previous school details (if applicable)</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+  <script>
+    // Hamburger toggle
+    const menuToggle = document.getElementById("menu-toggle");
+    const navbarMenu = document.getElementById("navbar-menu");
+
+    menuToggle.addEventListener("click", () => {
+      const expanded =
+        menuToggle.getAttribute("aria-expanded") === "true" || false;
+      menuToggle.setAttribute("aria-expanded", !expanded);
+      menuToggle.classList.toggle("active");
+      navbarMenu.classList.toggle("active");
+    });
+
+    // Filter selection function
+function filterSelection(category) {
+  const sections = document.querySelectorAll(".section");
+  const buttons = document.querySelectorAll(".filter-buttons button");
+
+  buttons.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+
+  if (category === "all") {
+    sections.forEach((section) => {
+      section.style.display = "block";
+    });
+    buttons[0].classList.add("active");
+  } else {
+    sections.forEach((section) => {
+      if (section.classList.contains(category)) {
+        section.style.display = "block";
+      } else {
+        section.style.display = "none";
+      }
+    });
+    buttons.forEach((btn) => {
+      if (btn.textContent.toLowerCase().includes(category)) {
+        btn.classList.add("active");
+      }
+    });
+  }
+}
+
+// Initial filter to show all
+filterSelection("all");
+
+
+    // Show the hidden student report section
+    function showReportForm() {
+      const section = document.getElementById("student-report-section");
+      section.style.display = "block";
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Sample student credentials and their PDF URLs (constants)
+
+    const students = {
+
+
+     
+      agniellaarnold: {
+        password: "AAM",
+        pdf: "pdfs/agniella_arnold.pdf",
+      },
+      aliceallen: {
+       password: "AAL",
+       pdf: "pdfs/alice_allen.pdf",
+      },
+      anethjoshua:{
+        password: "AJK",
+        pdf: "pdfs/aneth_joshua.pdf",
+      },
+      angelgodlisten: {
+       password: "AGN",
+       pdf: "pdfs/angel_godlisten.pdf",
+      },
+      blessflorencesamwel: {
+       password: "BFS",
+       pdf: "pdfs/blessflorence_samwel.pdf",
+      },
+      careenelibariki: {
+       password: "CES",
+       pdf: "pdfs/careen_elibariki.pdf",
+      },
+      clarissejoseph: {
+       password: "CJP",
+       pdf: "pdfs/clarisse_joseph.pdf",
+      },
+      doramalkiadi: {
+       password: "DMW",
+       pdf: "pdfs/dora_malkiadi.pdf",
+      },
+      dooreenmichael: {
+       password: "DMA",
+       pdf: "pdfs/dooreen_michael.pdf",
+      },
+      gloryrobet: {
+       password: "GRK",
+       pdf: "pdfs/glory_robet.pdf",
+      },
+      ireneotuno: {
+       password: "IED",
+       pdf: "pdfs/irene_otuno.pdf",
+      },
+      jaelderick: {
+       password: "JDA",
+       pdf: "pdfs/jael_derick.pdf",
+      },
+      janetsimon: {
+       password: "JSS",
+       pdf: "pdfs/janet_simon.pdf",
+      },
+      leticiacarol: {
+       password: "LCF",
+       pdf: "pdfs/leticia_carol.pdf",
+      },
+      miliamedson: {
+       password: "MEM",
+       pdf: "pdfs/miliam_edson.pdf",
+      },
+      moureenelphas: {
+       password: "MES",
+       pdf: "pdfs/moureen_elphas.pdf",
+      },
+      nairatherick: {
+       password: "NEE",
+       pdf: "pdfs/nairath_erick.pdf",
+      },
+      neemajustine: {
+       password: "NJM",
+        pdf: "pdfs/neema_justine.pdf",
+      },
+      noreengivenambrose: {
+       password: "NMA",
+       pdf: "pdfs/noreengiven_ambrose.pdf",
+      },
+      patriciawilson: {
+       password: "PWN",
+       pdf: "pdfs/patricia_wilson.pdf",
+      },
+paulinamanase: {
+    password: "PMM",
+    pdf: "pdfs/paulina_manase.pdf",
+},
+rosemaganga: {
+    password: "RMG",
+    pdf: "pdfs/rose_maganga.pdf",
+},
+veronikamashaka: {
+    password: "VMP",
+    pdf: "pdfs/veronika_mashaka.pdf",
+},
+adriansolomon: {
+    password: "ASP",
+    pdf: "pdfs/adrian_solomon.pdf",
+},
+brianrobert: {
+    password: "BRS",
+    pdf: "pdfs/brian_robert.pdf",
+},
+callmankephas: {
+    password: "CKN",
+    pdf: "pdfs/callman_kephas.pdf",
+},
+christianjames: {
+    password: "CJM",
+    pdf: "pdfs/christian_james.pdf",
+},
+cuthbertgodrick: {
+    password: "CGW",
+    pdf: "pdfs/cuthbert_godrick.pdf",
+},
+davethalex: {
+    password: "DAT",
+    pdf: "pdfs/daveth_alex.pdf",
+},
+emmanueljonathan: {
+    password: "EJM",
+    pdf: "pdfs/emmanuel_jonathan.pdf",
+},
+franciscomartin: {
+    password: "FMP",
+    pdf: "pdfs/francisco_martin.pdf",
+},
+gidionjerome: {
+    password: "GJW",
+    pdf: "pdfs/gidion_jerome.pdf",
+},
+giovanchristian: {
+    password: "GCM",
+    pdf: "giovan_christian.pdf",
+},
+greysonfred: {
+    password: "GFN",
+    pdf: "pdfs/greyson_fred.pdf",
+},
+humphreymichael: {
+    password: "HMM",
+    pdf: "pdfs/humphrey_michael.pdf",
+},
+innocentaron: {
+    password: "IAU",
+    pdf: "pdfs/innocent_aron.pdf",
+},
+joelrichard: {
+    password: "JRG",
+    pdf: "pdfs/joel_richard.pdf",
+},
+joshuafelibarick: {
+    password: "JEN",
+    pdf: "pdfs/joshua_elibarick.pdf",
+},
+jovinjulius: {
+    password: "JJF",
+    pdf: "pdfs/jovin_julius.pdf",
+},
+kelvincharles: {
+    password: "KCM",
+    pdf: "pdfs/kelvin_charles.pdf",
+},
+kelvinapolinary: {
+    password: "KAD",
+    pdf: "pdfs/kelvin_apolinary.pdf",
+},
+kelvinwilliam: {
+    password: "KWU",
+    pdf: "pdfs/kelvin_william.pdf",
+},
+lebronalex: {
+    password: "LAS",
+    pdf: "pdfs/lebron_alex.pdf",
+},
+nelsonjoshua: {
+    password: "NJK",
+    pdf: "pdfs/nelson_joshua.pdf",
+},
+patrickwilson: {
+    password: "PWV",
+    pdf: "pdfs/patrick_wilson.pdf",
+},
+prospergodson: {
+    password: "PGM",
+    pdf: "pdfs/prosper_godson.pdf",
+},
+sebastianseverin: {
+        password: "SSK",
+       pdf: "pdfs/sebastian_severin.pdf",
+      },
+
+      
+
+
+       AgnesCornelius: {
+    password: "ACJ",
+    pdf: "pdfs/agnes_cornelius.pdf",
+  },
+  AquirinerCharles: {
+    password: "ACM",
+    pdf: "pdfs/aquiriner_charles.pdf",
+  },
+  BeatriceEmmanuel: {
+    password: "BES",
+    pdf: "pdfs/beatrice_emmanuel.pdf",
+  },
+  BrightnessMelckzedeck: {
+    password: "BMN",
+    pdf: "pdfs/brightness_melckzedeck.pdf",
+  },
+  CareenPeter: {
+    password: "CPM",
+    pdf: "pdfs/careen_peter.pdf",
+  },
+  DeborahDavid: {
+    password: "DDK",
+    pdf: "pdfs/deborah_david.pdf",
+  },
+  DorcasOlais: {
+    password: "DOS",
+    pdf: "pdfs/dorcas_olais.pdf",
+  },
+  EsterSifuni: {
+    password: "ESP",
+    pdf: "pdfs/ester_sifuni.pdf",
+  },
+  GraceIsaya: {
+    password: "GIM",
+    pdf: "pdfs/grace_isaya.pdf",
+  },
+  HadraHashim: {
+    password: "HHN",
+    pdf: "pdfs/hadra_hashim.pdf",
+  },
+  HappyJohn: {
+    password: "HJW",
+    pdf: "pdfs/happy_john.pdf",
+  },
+  IrisSimon: {
+    password: "ISL",
+    pdf: "pdfs/iris_simon.pdf",
+  },
+  JanethAman: {
+    password: "JAM",
+    pdf: "pdfs/janeth_aman.pdf",
+  },
+  JillianAlphonce: {
+    password: "JAA",
+    pdf: "pdfs/jillian_alphonce.pdf",
+  },
+  KellynKombo: {
+    password: "KKS",
+    pdf: "pdfs/kellyn_kombo.pdf",
+  },
+  NeemaJoseph: {
+    password: "NJT",
+    pdf: "pdfs/neema_joseph.pdf",
+  },
+  PacessetterGilbert: {
+    password: "PGM",
+    pdf: "pdfs/pacessetter_gilbert.pdf",
+  },
+  PriscaCosmas: {
+    password: "PCM",
+    pdf: "pdfs/prisca_cosmas.pdf",
+  },
+  SalhaJumanne: {
+    password: "SJN",
+    pdf: "pdfs/salha_jumanne.pdf",
+  },
+  TeresiaAtanas: {
+    password: "TAP",
+    pdf: "pdfs/teresía_atanas.pdf",
+  },
+  AmulikeNsajigwa: {
+    password: "ANM",
+    pdf: "pdfs/amulike_nsajigwa.pdf",
+  },
+  AndrewDaniel: {
+    password: "ADP",
+    pdf: "pdfs/andrew_daniel.pdf",
+  },
+  ArianGeorge: {
+    password: "AGJ",
+    pdf: "pdfs/arian_george.pdf",
+  },
+  AthumanAbdallah: {
+    password: "AAA",
+    pdf: "pdfs/athuman_abdallah.pdf",
+  },
+  BrayanRichard: {
+    password: "BRC",
+    pdf: "pdfs/brayan_richard.pdf",
+  },
+  BrianFrancis: {
+    password: "BFR",
+    pdf: "pdfs/brian_francis.pdf",
+  },
+  EbenezerJohn: {
+    password: "EJK",
+    pdf: "pdfs/ebenezer_john.pdf",
+  },
+  EdsonElijah: {
+    password: "EEA",
+    pdf: "pdfs/edson_elijah.pdf",
+  },
+  EliyaPius: {
+    password: "EPM",
+    pdf: "pdfs/eliya_pius.pdf",
+  },
+  FrancisGiliba: {
+    password: "FG",
+    pdf: "pdfs/francis_giliba.pdf",
+  },
+  GyanEmmanuel: {
+    password: "GEK",
+    pdf: "pdfs/gyan_emmanuel.pdf",
+  },
+  HoraceElias: {
+    password: "HEM",
+    pdf: "pdfs/horace_elias.pdf",
+  },
+  IbrahimYusuph: {
+    password: "INY",
+    pdf: "pdfs/ibrahim_yusuph.pdf",
+  },
+  IsackFaustin: {
+    password: "IFI",
+    pdf: "pdfs/isack_faustin.pdf",
+  },
+  JamesOreste: {
+    password: "JOM",
+    pdf: "pdfs/james_oreste.pdf",
+  },
+  JohnsonVictor: {
+    password: "JVJ",
+    pdf: "pdfs/johnson_victor.pdf",
+  },
+  JoshuaChristian: {
+    password: "JCS",
+    pdf: "pdfs/joshua_christian.pdf",
+  },
+  JoshuaLotorivock: {
+    password: "JLL",
+    pdf: "pdfs/joshua_lotorivock.pdf",
+  },
+  KazenzeleMaganga: {
+    password: "KMD",
+    pdf: "pdfs/kazenzele_maganga.pdf",
+  },
+  KephasGeofrey: {
+    password: "KGM",
+    pdf: "pdfs/kephas_geofrey.pdf",
+  },
+  MalkiGodfrey: {
+    password: "MGM",
+    pdf: "pdfs/malki_godfrey.pdf",
+  },
+  MarkJulius: {
+    password: "MJL",
+    pdf: "pdfs/mark_julius.pdf",
+  },
+  MethuselaBaraka: {
+    password: "MBK",
+    pdf: "pdfs/methusela_baraka.pdf",
+  },
+  MichaelJames: {
+    password: "MJG",
+    pdf: "pdfs/michael_james.pdf",
+  },
+  MughamayAbdulkarim: {
+    password: "MAM",
+    pdf: "pdfs/mughamay_abdulkarim.pdf",
+  },
+  NoahAmani: {
+    password: "NAE",
+    pdf: "pdfs/noah_amani.pdf",
+  },
+  PezuelSolomon: {
+    password: "PSL",
+    pdf: "pdfs/pezuel_solomon.pdf",
+  },
+  PraygodFranael: {
+    password: "PFU",
+    pdf: "pdfs/praygod_franael.pdf",
+  },
+  StephenPaul: {
+    password: "SPK",
+    pdf: "pdfs/stephen_paul.pdf",
+  },
+
+
+
+    };
+
+    function login() {
+      const studentNameInput = document
+        .getElementById("student-name")
+        .value.trim()
+        .toLowerCase();
+      const passwordInput = document.getElementById("password").value;
+
+      const loginError = document.getElementById("login-error");
+
+      if (
+        students[studentNameInput] &&
+        students[studentNameInput].password === passwordInput
+      ) {
+        loginError.style.display = "none";
+        // Open the PDF in a new tab/window
+        window.open(students[studentNameInput].pdf, "_blank");
+
+        // Clear and hide the form after opening the PDF
+        document.getElementById("login-form").reset();
+        document.getElementById("student-report-section").style.display = "none";
+      } else {
+        loginError.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
