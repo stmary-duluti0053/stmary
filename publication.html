@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>St. Mary's Duluti - Publications</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+      color: #333;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .navbar {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      padding: 6px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      animation: slideDown 0.5s ease;
+      margin: 3mm auto 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .navbar-logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.07);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 21px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      user-select: none;
+    }
+
+    .hamburger .bar {
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #4e4376;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu li {
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      .menu a {
+        padding: 12px 0;
+        width: 100%;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .content {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      animation: fadeIn 1s ease;
+    }
+
+    h1, h2 {
+      color: #2b5876;
+      margin-bottom: 15px;
+    }
+
+    .publication-section {
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .publication-section:hover {
+      transform: translateY(-5px);
+    }
+
+    .publication-section ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .publication-section li {
+      margin-bottom: 10px;
+    }
+
+    .publication-section a {
+      color: #4e4376;
+      text-decoration: none;
+      font-weight: 600;
+      transition: text-decoration 0.2s ease;
+      word-wrap: break-word;
+    }
+
+    .publication-section a:hover,
+    .publication-section a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .section-icon {
+      margin-right: 8px;
+      color: #4e4376;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <div class="navbar-logo">St. Mary's Duluti</div>
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="menu" id="navbar-menu">
+      <li><a href="index.html"><img src="home icon.png" style="width:20px; vertical-align:middle;"> Home</a></li>
+      <li><a href="academics page.html"><img src="academic icon.png" style="width:20px; vertical-align:middle;"> Academics</a></li>
+      <li><a href="admission page.html"><img src="admission.png" style="width:20px; vertical-align:middle;"> Admission</a></li>
+      <li><a href="explore us page.html"><img src="explore us.png" style="width:20px; vertical-align:middle;"> Explore Us</a></li>
+      <li><a href="application.html"><img src="application.png" style="width:20px; vertical-align:middle;"> Application</a></li>
+      <li><a href="gallery.html"><img src="gallery.png" style="width:20px; vertical-align:middle;"> Gallery</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <h1>Publications at St. Mary's Duluti</h1>
+    <p>St. Mary's Duluti encourages creativity and intellectual growth through various school publications. These include student clubs, science experiments, reports, newsletters, and journals that reflect the vibrant academic life within the school.</p>
+
+    <!-- NEW: Announcement from the Headmaster -->
+    <div class="publication-section">
+      <h2><i class="fas fa-user-tie section-icon" aria-hidden="true"></i>Announcement from the Headmaster</h2>
+      <ul>
+        <li><strong>NOTICE TO PARENTS/GUARDIANS:</strong></li>
+      <p>The management of St. Mary’s Duluti wishes to inform all parents and guardians that school will officially close for the term on Friday, 6th June 2025. Parents are kindly requested to come and pick up their children from 7:00 AM on that day.
+
+We kindly ask all parents and guardians to ensure timely pickup to avoid any inconveniences.
+
+We appreciate your continued support and cooperation.
+
+Management – St. Mary’s Duluti</p>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-users section-icon" aria-hidden="true"></i>Student Clubs & Activities</h2>
+      <ul>
+        <li><strong>Science Club:</strong> Publishes monthly lab reports and innovations.</li>
+        <li><strong>Literature Club:</strong> Releases a termly newsletter with poems, essays, and short stories.</li>
+        <li><strong>Environmental Club:</strong> Shares articles about conservation and campus clean-up drives.</li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-bullhorn section-icon" aria-hidden="true"></i>Announcements from School Board</h2>
+      <ul>
+        <li><strong>Admissions Open:</strong> Applications for 2025 intake are now being accepted. <a href="#">Apply Now</a></li>
+        <li><strong>Vacancies:</strong> Limited slots available in Form I, II, and V. Contact admin for more details.</li>
+        <li><strong>Parent Meeting:</strong> Next PTA Meeting scheduled for June 10th at 10:00 AM in the main hall.</li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-school section-icon" aria-hidden="true"></i>School News</h2>
+      <ul>
+        <li><strong>Science Fair 2025:</strong> Our students won 1st place in the National Science Expo held in Arusha!</li>
+        <li><strong>New Library Wing:</strong> The school inaugurated a new digital library wing with over 2,000 e-resources.</li>
+        <li><strong>Football Victory:</strong> The school team won against St. Joseph’s High in the regional sports finals!</li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-star section-icon" aria-hidden="true"></i>Featured Articles</h2>
+      <ul>
+        <li><strong>"The Power of Curiosity"</strong> – A compelling essay by Form IV student Amina L. exploring how curiosity drives scientific discovery.</li>
+        <li><strong>"Swahili in Modern Media"</strong> – A thought-provoking article by Mr. Ndelema on preserving culture in digital age.</li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-book section-icon" aria-hidden="true"></i>School Reports & Journals</h2>
+      <ul>
+        <li><a href="#">2024 Annual Academic Report</a></li>
+        <li><a href="#">St. Mary’s Duluti Science Fair Summary</a></li>
+        <li><a href="#">Newsletter - Term 1, 2025</a></li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-download section-icon" aria-hidden="true"></i>Digital Resources & Downloads</h2>
+      <ul>
+        <li><a href="#">Student Handbook 2025 (PDF)</a></li>
+        <li><a href="#">Parent-Teacher Communication Guide (PDF)</a></li>
+        <li><a href="#">Science Project Template (Word)</a></li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-flask section-icon" aria-hidden="true"></i>Laboratory Reports & Science Journals</h2>
+      <ul>
+        <li><a href="#">Physics Experiment Series - Vol 1 (PDF)</a></li>
+        <li><a href="#">Chemistry Reactions and Discoveries (PDF)</a></li>
+        <li><a href="#">Biology Field Report - Mount Meru Excursion</a></li>
+      </ul>
+    </div>
+
+    <div class="publication-section">
+      <h2><i class="fas fa-newspaper section-icon" aria-hidden="true"></i>Student Newsletter</h2>
+      <ul>
+        <li><a href="#">Duluti Voice - March Edition (Download PDF)</a></li>
+        <li><a href="#">Duluti Voice - December Special (Download PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const navbarMenu = document.getElementById("navbar-menu");
+
+    menuToggle.addEventListener("click", () => {
+      navbarMenu.classList.toggle("active");
+      menuToggle.classList.toggle("active");
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
+    });
+  </script>
+</body>
+</html>

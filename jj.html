@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Application - St. Mary's Duluti</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #4e4376, #2b5876);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      background: white;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2, h3 {
+      text-align: center;
+      color: #2b5876;
+    }
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    ul {
+      margin: 0 auto 20px auto;
+      padding-left: 20px;
+      max-width: 300px;
+    }
+    ul li {
+      margin-bottom: 8px;
+    }
+    form {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+    button {
+      margin-top: 25px;
+      padding: 12px;
+      font-size: 1rem;
+      background-color: #2b5876;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #4e4376;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Student Application Portal</h2>
+    <p>Welcome to St. Mary’s Duluti application page. Kindly select the level of education you're applying for. Fill in the form below to submit your application.</p>
+
+    <h3>O-Level Application</h3>
+    <ul>
+      <li>Pre-Form One</li>
+      <li>Form One</li>
+      <li>Form Two</li>
+      <li>Form Three</li>
+      <li>Form Four</li>
+    </ul>
+
+    <h3>A-Level Application</h3>
+    <ul>
+      <li>Pre-Form Five</li>
+      <li>Form Five</li>
+      <li>Form Six</li>
+    </ul>
+
+    <form id="applicationForm">
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" required>
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="level">Level Applying For</label>
+      <select id="level" name="level" required>
+        <option value="">--Select Level--</option>
+        <option value="Pre-Form One">Pre-Form One</option>
+        <option value="Form One">Form One</option>
+        <option value="Form Two">Form Two</option>
+        <option value="Form Three">Form Three</option>
+        <option value="Form Four">Form Four</option>
+        <option value="Pre-Form Five">Pre-Form Five</option>
+        <option value="Form Five">Form Five</option>
+        <option value="Form Six">Form Six</option>
+      </select>
+
+      <label for="combination">Preferred Subject Combination (A-Level only)</label>
+      <input type="text" id="combination" name="combination" placeholder="e.g., PCM, EGM, PCB">
+
+      <label for="guardian">Parent/Guardian Name</label>
+      <input type="text" id="guardian" name="guardian" required>
+
+      <label for="contact">Contact Number</label>
+      <input type="tel" id="contact" name="contact" required>
+
+      <label for="document">Upload Previous Results (PDF/Image)</label>
+      <input type="file" id="document" name="document" accept=".pdf, image/*">
+
+      <label for="message">Additional Message (optional)</label>
+      <textarea id="message" name="message" rows="4" placeholder="Any other details..."></textarea>
+
+      <button type="submit">Submit Application</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('applicationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value;
+      const level = document.getElementById('level').value;
+      const contact = document.getElementById('contact').value;
+      const message = document.getElementById('message').value;
+
+      const phone = '0621019083'; // Replace with your school number
+      const text = `Application from ${name}%0AClass Level: ${level}%0AContact: ${contact}%0AMessage: ${message}`;
+      const whatsappURL = `https://wa.me/${phone}?text=${text}`;
+
+      window.open(whatsappURL, '_blank');
+      alert('Redirecting to WhatsApp for application submission...');
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>St Mary’s Duluti Secondary School</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .slideshow {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+    }
+
+    .slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slideshow img.active {
+      opacity: 1;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .inner-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+
+    .school-logo {
+      height: 100px;
+      width: 100px;
+      object-fit: contain;
+    }
+
+    .page-header {
+      font-size: 2.2rem;
+      color: rgb(26, 92, 136);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .tabs-container {
+      display: grid;
+      grid-template-columns: repeat(3, 200px);
+      grid-template-rows: repeat(2, 200px);
+      gap: 15px;
+      justify-content: center;
+      margin-top: 2cm;
+      z-index: 10;
+      position: relative;
+    }
+
+    .tab {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-size: 1.1rem;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      color: black;
+      text-decoration: none;
+    }
+
+    .tab img {
+      width: 50px;
+      height: 50px;
+      margin-top: 8px;
+      object-fit: contain;
+    }
+
+    .tab1 { background-color: #2687a5bd; }
+    .tab2 { background-color: #2273a8b6; }
+    .tab3 { background-color: #2a7897a6; }
+    .tab4 { background-color: #257296a4; }
+    .tab5 { background-color: #2d94ad9a; }
+    .tab6 { background-color: #229797b4; }
+
+    .tab1:hover, .tab2:hover, .tab3:hover, .tab4:hover, .tab5:hover, .tab6:hover {
+      background-color: #083a3b;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .footer-columns {
+      display: flex;
+      justify-content: space-between;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px 20px;
+      margin-top: 100px;
+      z-index: 10;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .footer-columns .column {
+      flex: 1;
+      margin: 10px 20px;
+      min-width: 200px;
+    }
+
+    .footer-columns h3 {
+      margin-bottom: 10px;
+      color: #1a5c88;
+    }
+
+    .footer-columns p {
+      color: #444;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .social-icons {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      z-index: 9999;
+    }
+
+    .social-icons a img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .social-icons a:hover img {
+      transform: scale(1.3);
+      filter: brightness(1.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .tabs-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 10px;
+        margin-top: 1cm;
+      }
+
+      .page-header {
+        font-size: 1.5rem;
+        white-space: normal;
+      }
+
+      .inner-header {
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+
+      .school-logo {
+        height: 70px;
+        width: 70px;
+      }
+
+      .footer-columns {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-columns .column {
+        margin: 10px 0;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 992px) {
+      .tabs-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 1.5cm;
+      }
+
+      .page-header {
+        font-size: 1.8rem;
+      }
+
+      .footer-columns {
+        flex-direction: column;
+      }
+
+      .footer-columns .column {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Social Icons -->
+  <div class="social-icons">
+    <a href="https://www.facebook.com/pages/St-Marys-Duluti-Sec-School/1872719259634145" target="_blank">
+      <img src="facebook.png" alt="Facebook" title="Facebook" />
+    </a>
+    <a href="https://wa.me/255714723872?text=Habari%2C%20ningependa%20kupata%20huduma%E2%80%A6" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp" title="WhatsApp" />
+    </a>
+    <a href="https://www.instagram.com/st.marysduluti_arushatz/" target="_blank">
+      <img src="instagram.png" alt="Instagram" title="Instagram" />
+    </a>
+    <a href="mailto:stmary.duluti@yahoo.com" target="_blank">
+      <img src="gmail.png" alt="Gmail" title="Email" />
+    </a>
+  </div>
+
+  <!-- Slideshow -->
+  <div class="slideshow">
+    <img src="LZ0_0991.jpg" alt="Slide 1" class="active" />
+    <img src="LZ0_0991.jpg" alt="Slide 2" />
+    <img src="LZ0_1003.jpg" alt="Slide 3" />
+    <img src="LZ0_1016.jpg" alt="Slide 4" />
+  </div>
+
+  <!-- Header -->
+  <div class="header-container">
+    <div class="inner-header">
+      <img src="LOGO_transparent.png" alt="Logo" class="school-logo" />
+      <h1 class="page-header">St. Mary’s Duluti Secondary School</h1>
+      <img src="maria.avif" alt="Right Logo" class="school-logo" />
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-container">
+    <a href="academics page.html" class="tab tab4">
+      <div class="label">ACADEMICS</div>
+      <img src="academic icon.png" alt="Academics Icon" />
+    </a>
+    <a href="admission page.html" class="tab tab2">
+      <div class="label">ADMISSION</div>
+      <img src="admission.png" alt="Admission Icon" />
+    </a>
+    <a href="explore us page.html" class="tab tab3">
+      <div class="label">EXPLORE US</div>
+      <img src="explore us.png" alt="Explore Icon" />
+    </a>
+    <a href="application.html" class="tab tab5">
+      <div class="label">APPLICATION</div>
+      <img src="application.png" alt="Application Icon" />
+    </a>
+    <a href="publication.html" class="tab tab6">
+      <div class="label">PUBLICATION</div>
+      <img src="publication.png" alt="Publication Icon" />
+    </a>
+    <a href="gallery.html" class="tab tab4">
+      <div class="label">GALLERY</div>
+      <img src="gallery.png" alt="Gallery Icon" />
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-columns">
+    <div class="column">
+      <h3>CONTACT US:</h3>
+      Mobile Number:<br />
+      +255 714&nbsp;723&nbsp;872<br />
+      +255 784&nbsp;848&nbsp;579<br />
+      +255 621&nbsp;019&nbsp;083<br />
+      P.O.Box 53 Duluti-Arusha.
+    </div>
+    <div class="column">
+      <h3>LOCATION</h3>
+      Arusha, Arumeru<br />
+      Arusha – Moshi Road <br />
+      <a href="https://www.google.com/maps/search/St.+Mary%27s+Duluti+Secondary+School" target="_blank">
+        <img src="location.gif" alt="location" title="view on map" /> Location
+      </a>
+    </div>
+    <div class="column">
+      <h3>BRANCHES</h3>
+      Moshi: &nbsp;0756751748 <br />
+      Dar es Salaam:&nbsp;0787316039 <br />
+      Rombo: &nbsp;0766813488 <br />
+      Dodoma: &nbsp;0786868138 <br />
+    </div>
+  </div>
+
+  <!-- Slideshow Script -->
+  <script>
+    const slides = document.querySelectorAll('.slideshow img');
+    let current = 0;
+
+    function showNextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    setInterval(showNextSlide, 10000);
+  </script>
+
+</body>
+</html>

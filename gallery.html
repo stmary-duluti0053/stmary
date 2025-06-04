@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery | St. Mary's Duluti</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+      color: #333;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* ======== NAVBAR ======== */
+    .navbar {
+      width: 100%;
+      max-width: 1200px;
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      padding: 6px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      animation: slideDown 0.5s ease;
+      margin: 3mm auto 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .navbar-logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .menu {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+      border-radius: 8px;
+      user-select: none;
+    }
+
+    .menu a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.07);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 21px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      user-select: none;
+    }
+
+    .hamburger .bar {
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #4e4376;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+
+      .menu.active {
+        display: flex;
+      }
+
+      .menu li {
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      .menu a {
+        padding: 12px 0;
+        width: 100%;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* ======== GALLERY ======== */
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      color: #4c6386;
+      margin-bottom: 20px;
+    }
+
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .filter-buttons button {
+      background-color: #49898b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      background-color: #2b5876;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 10px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(25px);
+      transition: all 0.8s ease;
+    }
+
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, filter 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(0.95);
+      filter: grayscale(10%) brightness(0.95);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(62, 132, 145, 0.8);
+      color: #fff;
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .lightbox .caption {
+      color: white;
+      margin-top: 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .gallery-item img {
+        height: 180px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+    <div class="navbar-logo">St. Mary's Duluti</div>
+    <button class="hamburger" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="menu" id="navbar-menu">
+      <li><a href="index.html"><img src="home icon.png" alt="Home" style="width:20px; vertical-align:middle;"> Home</a></li>
+      <li><a href="academics page.html"><img src="academic icon.png" alt="Academics" style="width:20px; vertical-align:middle;"> Academics</a></li>
+      <li><a href="admission.html"><img src="admission.png" alt="Admission" style="width:20px; vertical-align:middle;"> Admission</a></li>
+      <li><a href="application.html"><img src="application.png" alt="application" style="width:20px; vertical-align:middle;"> Application</a></li>
+      <li><a href="explore us.html"><img src="explore us.png" alt="Explore Us" style="width:20px; vertical-align:middle;"> Explore Us</a></li>
+      <li><a href="publication.html"><img src="publication.png" alt="Publication" style="width:20px; vertical-align:middle;"> Publication</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE TITLE -->
+  <h1>Gallery - St. Mary's Duluti Sec School.</h1>
+
+  <div class="filter-buttons">
+    <button class="active" onclick="filterGallery('all')">All</button>
+    <button onclick="filterGallery('facilities')">School Facilities</button>
+    <button onclick="filterGallery('awards')">Awards</button>
+    <button onclick="filterGallery('sports')">Sports</button>
+    <button onclick="filterGallery('tour')">Study Tour</button>
+  </div>
+
+  <div class="gallery">
+    <!-- Facilities -->
+    <div class="gallery-item facilities" onclick="openLightbox('library.jpg', 'Modern Library')">
+      <img src="library.jpg" alt="Library" />
+      <div class="gallery-caption">Modern Library</div>
+    </div>
+    <div class="gallery-item facilities" onclick="openLightbox('laboratory.jpg', 'Science Laboratory')">
+      <img src="laboratory.jpg" alt="Laboratory" />
+      <div class="gallery-caption">Science Laboratory</div>
+    </div>
+    <div class="gallery-item facilities" onclick="openLightbox('school.jpg', 'School Buildings')">
+      <img src="school.jpg" alt="School" />
+      <div class="gallery-caption">School Buildings</div>
+    </div>
+
+    <!-- Awards -->
+    <div class="gallery-item awards" onclick="openLightbox('academics excellence.jpg', 'Academics Excellence')">
+      <img src="academics excellence.jpg" alt="Academics Excellence" />
+      <div class="gallery-caption">Academics Excellence</div>
+    </div>
+    <div class="gallery-item awards" onclick="openLightbox('debate.jpeg', 'Best Debaters 2024')">
+      <img src="debate.jpeg" alt="Debate" />
+      <div class="gallery-caption">Best Debaters 2024</div>
+    </div>
+    <div class="gallery-item awards" onclick="openLightbox('discussion.jpg', 'Students Discussion')">
+      <img src="discussion.jpg" alt="Discussion" />
+      <div class="gallery-caption">Students Discussion</div>
+    </div>
+
+    <!-- Sports -->
+    <div class="gallery-item sports" onclick="openLightbox('football.jpg', 'Football Victory')">
+      <img src="football.jpg" alt="Football" />
+      <div class="gallery-caption">Football Victory</div>
+    </div>
+     <div class="gallery-item sports" onclick="openLightbox('basketball.jfif', 'Basketball Victory')">
+      <img src="basketball.jfif" alt="Basketball" />
+      <div class="gallery-caption">Basketball Victory</div>
+    </div>
+     <div class="gallery-item sports" onclick="openLightbox('volleyball.jpg', 'Volleyball Victory')">
+      <img src="volleyball.jpg" alt="Volleyball" />
+      <div class="gallery-caption">Volleyball Victory</div>
+    </div>
+
+    <!-- Study Tour -->
+    <div class="gallery-item tour" onclick="openLightbox('mikumi.jfif', 'Mikumi Tourism')">
+      <img src="mikumi.jfif" alt="Mikumi" />
+      <div class="gallery-caption">Mikumi Tourism</div>
+    </div>
+     <div class="gallery-item tour" onclick="openLightbox('serengeti.jpg', 'Serengeti Tourism')">
+      <img src="serengeti.jpg" alt="Serengeti" />
+      <div class="gallery-caption">Serengeti Tourism</div>
+    </div>
+     <div class="gallery-item tour" onclick="openLightbox('bagamoyo.jpg', 'Bagamoyo Tourism')">
+      <img src="bagamoyo.jfif" alt="Bagamoyo" />
+      <div class="gallery-caption">Bagamoyo Tourism</div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="close" id="lightbox-close">&times;</span>
+    <img src="" alt="Lightbox Image" id="lightbox-img">
+    <div class="caption" id="lightbox-caption"></div>
+  </div>
+
+    <script>
+    // Hamburger menu toggle
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+      const menu = document.getElementById("navbar-menu");
+      this.classList.toggle("active");
+      menu.classList.toggle("active");
+      const expanded = this.classList.contains("active");
+      this.setAttribute("aria-expanded", expanded);
+    });
+
+    // Lightbox functionality
+    const galleryItems = document.querySelectorAll(".gallery-item img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const lightboxClose = document.getElementById("lightbox-close");
+
+    galleryItems.forEach(img => {
+      img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = img.alt || "Image";
+      });
+    });
+
+    lightboxClose.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
+
+    // Scroll animation
+    const galleryItemEls = document.querySelectorAll(".gallery-item");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    galleryItemEls.forEach(el => observer.observe(el));
+
+    // ✅ Filter functionality
+    function filterGallery(category) {
+      document.querySelectorAll('.filter-buttons button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const items = document.querySelectorAll('.gallery-item');
+      items.forEach(item => {
+        if (category === 'all' || item.classList.contains(category)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
