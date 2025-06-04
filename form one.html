@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <title>Form One Application Form - 2024</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 40px;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid #000;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin: 5px 0;
+    }
+
+    .form-section {
+      margin-top: 20px;
+    }
+
+    .form-section h4 {
+      margin-bottom: 10px;
+      text-decoration: underline;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 15px;
+      border: 1px solid #000;
+      border-radius: 8px;
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .col {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .photo-box {
+      width: 180px;
+      border: 2px solid #000;
+      text-align: center;
+      padding: 5px;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: none;
+      border-bottom: 1px solid #000;
+      margin-bottom: 5px;
+    }
+
+    .photo-box button {
+      margin-top: 8px;
+      padding: 6px 12px;
+      background-color: #2d6cdf;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .photo-box button:hover {
+      background-color: #1a4fb8;
+    }
+
+    .exam-dates {
+      margin-top: 30px;
+      border-top: 1px dashed #000;
+      padding-top: 15px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+
+    .stamp {
+      margin-top: 40px;
+      font-style: italic;
+    }
+
+    ol {
+      margin-left: 20px;
+    }
+
+    .logo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-header img {
+      height: 80px;
+    }
+
+    .school-info {
+      text-align: center;
+      flex: 1;
+    }
+
+    .signature-area {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .signature-area img {
+      height: 60px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .submit-btn-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .submit-btn-container button {
+      padding: 10px 20px;
+      background-color: #2d6cdf;
+      color: white;
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .submit-btn-container button:hover {
+      background-color: #1a4fb8;
+    }
+  </style>
+</head>
+<body>
+  <form action="https://formsubmit.co/stmarys.duluti@yahoo.com" method="POST">
+  <div class="container">
+
+    <!-- LOGO SECTION -->
+    <div class="logo-header">
+      <img src="LOGO_transparent.png" alt="Logo Kushoto">
+      <div class="school-info">
+        <h2>ST. MARY’S DULUTI SECONDARY SCHOOL</h2>
+        <h3>BROTHERS OF CHRISTIAN INSTRUCTIONS</h3>
+        <p>www.stmarysduluti.ac.tz | info@stmarysduluti.ac.tz<br>
+          P.O. BOX 53 DULUTI - ARUSHA TANZANIA<br>
+          TEL: +255 714 723 872 / +255 784 848 579</p>
+      </div>
+      <img src="LOGO_transparent.png" alt="Logo Kulia">
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <!-- PHOTO UPLOAD -->
+      <div class="photo-box">
+        <img id="previewImage" alt="Picha ya Mwanafunzi">
+        <br>
+        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="previewPhoto(event)">
+        <button type="button" onclick="document.getElementById('photoInput').click()">picha</button>
+      </div>
+    </div>
+
+    <p><strong>Soma fomu hii na kuielewa kisha ijaze vizuri kama inavyoelekeza.</strong></p>
+
+    <!-- FORM CONTENT -->
+    <form action="form-handler.php" method="POST" enctype="multipart/form-data">
+      <div class="form-section">
+        <h4>1. MAELEZO KUHUSU MWANAFUNZI</h4>
+        <label>Jina Kamili (Majina Matatu)</label>
+        <input type="text" name="student_name" required>
+        
+        <div class="row">
+          <div class="col">
+            <label>Jinsia:</label>
+            <label><input type="radio" name="jinsia" value="mwanaume"> Me</label>
+            <label><input type="radio" name="jinsia" value="mwanamke"> Ke</label>
+          </div>
+          <div class="col">
+            <label>Tarehe ya Kuzaliwa</label>
+            <input type="date" name="dob" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Mkoa</label>
+            <input type="text" name="mkoa">
+          </div>
+          <div class="col">
+            <label>Wilaya</label>
+            <input type="text" name="wilaya">
+          </div>
+        </div>
+        <label>Anwani ya Mwanafunzi</label>
+        <input type="text" name="address">
+        <label>Mtaa Anaoishi</label>
+        <input type="text" name="street">
+      </div>
+
+      <div class="form-section">
+        <h4>2. MAELEZO KUHUSU SHULE YA MSINGI ALIYOSOMA MWANAFUNZI</h4>
+        <label>Jina la Shule ya Msingi</label>
+        <input type="text" name="primary_school" required>
+        <div class="row">
+          <div class="col">
+            <label>Wilaya</label>
+            <input type="text" name="primary_school_district">
+          </div>
+          <div class="col">
+            <label>Mkoa</label>
+            <input type="text" name="primary_school_region">
+          </div>
+        </div>
+        <label>Mwaka Aliomaliza Shule ya Msingi</label>
+        <input type="text" name="primary_school_year">
+      </div>
+
+      <div class="form-section">
+        <h4>3. MAELEZO KUHUSU MZAZI / MLEZI</h4>
+        <label>Jina Kamili la Mzazi / Mlezi</label>
+        <input type="text" name="parent_name" required>
+        <label>Anwani</label>
+        <input type="text" name="parent_address">
+        <div class="row">
+          <div class="col">
+            <label>Simu</label>
+            <input type="tel" name="phone" required>
+          </div>
+          <div class="col">
+            <label>Kazi</label>
+            <input type="text" name="job">
+          </div>
+        </div>
+        <label>Sahihi ya Mzazi / Mlezi</label>
+        <input type="text" name="signature">
+      </div>
+
+      <div class="exam-dates">
+        <p><strong>Mtihani utafanyika siku ya Jumamosi tarehe 23/09/2023, 30/09/2023 na tarehe 07/10/2023 siku za Jumamosi saa 2:00 asubuhi katika vituo vifuatavyo:</strong></p>
+        <ol>
+          <li>Dodoma - Dodoma Sekondari (Dodoma Mjini)</li>
+          <li>Dar es Salaam - St. Anthony’s Sekondari – Mbagala</li>
+          <li>Moshi - Brother’s Center, E-Quality Day Care Montessori</li>
+          <li>Arusha - St. Mary’s Duluti Sekondari</li>
+          <li>Iringa - Lutengano Book Shop</li>
+          <li>Singida - Parokia ya Moyo wa Yesu Singida</li>
+        </ol>
+      </div>
+
+      <!-- Signature Section -->
+      <div class="signature-area">
+        <label>Sahihi ya Mkuu wa Shule</label>
+        <img src="signature_image.png" alt="Signature">
+      </div>
+
+      <div class="footer">
+        <div class="stamp">Stamp: St. Mary’s Duluti Secondary School</div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="submit-btn-container">
+        <button type="submit">Tuma Fomu</button>
+      </div>
+    </form>
+
+  </div>
+
+  <script>
+    function previewPhoto(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function() {
+        document.getElementById('previewImage').style.display = 'block';
+        document.getElementById('previewImage').src = reader.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  </script></form>
+</body>
+</html>
