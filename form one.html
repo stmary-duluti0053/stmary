@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fomu ya Jina, Umri, na Namba ya Simu</title>
+</head>
+<body>
+    <h2>Jaza Fomu Hii</h2>
+
+    <form action="https://formsubmit.co/stmary.duluti@yahoo.com" method="POST">
+        <!-- Sehemu ya Jina -->
+        <label for="jina">Jina lako:</label>
+        <input type="text" id="jina" name="jina" required>
+        <br><br>
+
+        <!-- Sehemu ya Umri -->
+        <label for="umri">Umri wako:</label>
+        <input type="number" id="umri" name="umri" min="0" required>
+        <br><br>
+
+        <!-- Sehemu ya Namba ya Simu -->
+        <label for="simu">Namba ya Simu:</label>
+        <input type="tel" id="simu" name="simu" pattern="[0-9]{10}" placeholder="Namba ya Simu (10 digits)" required>
+        <br><br>
+
+        <!-- Button ya ku-submit -->
+        <input type="submit" value="Tuma">
+    </form>
+
+</body>
+</html>
